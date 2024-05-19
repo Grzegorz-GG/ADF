@@ -769,7 +769,7 @@
 						"type": "Copy",
 						"dependsOn": [
 							{
-								"activity": "Set variable2",
+								"activity": "Set RunSeqNo",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -1062,7 +1062,7 @@
 						}
 					},
 					{
-						"name": "Set variable2",
+						"name": "Set RunSeqNo",
 						"type": "SetVariable",
 						"dependsOn": [
 							{
@@ -1083,6 +1083,36 @@
 								"value": "@int(activity('Lookup RunSeqNo').output.firstRow.RunSeqNo)",
 								"type": "Expression"
 							}
+						}
+					},
+					{
+						"name": "Set return value",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "Set RunSeqNo",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "pipelineReturnValue",
+							"value": [
+								{
+									"key": "PipelineRunSeqNo",
+									"value": {
+										"type": "Expression",
+										"content": "@variables('RunSeqNo')"
+									}
+								}
+							],
+							"setSystemVariable": true
 						}
 					}
 				],
@@ -1105,6 +1135,15 @@
 				"variables": {
 					"RunSeqNo": {
 						"type": "Integer"
+					},
+					"ReturnValue": {
+						"type": "Integer"
+					},
+					"ReturnValueArray": {
+						"type": "Array"
+					},
+					"ReturnedValues": {
+						"type": "Array"
 					}
 				},
 				"annotations": []
@@ -1169,10 +1208,39 @@
 								"CommentWhichPipe": "SweetTreats"
 							}
 						}
+					},
+					{
+						"name": "Set variable1",
+						"type": "SetVariable",
+						"dependsOn": [
+							{
+								"activity": "SweetTreats",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"policy": {
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"variableName": "ReturnedValue",
+							"value": {
+								"value": "@activity('Desserts4All').output.pipelineReturnValue.PipelineRunSeqNo",
+								"type": "Expression"
+							}
+						}
 					}
 				],
 				"policy": {
 					"elapsedTimeMetric": {}
+				},
+				"variables": {
+					"ReturnedValue": {
+						"type": "Array"
+					}
 				},
 				"annotations": []
 			},
