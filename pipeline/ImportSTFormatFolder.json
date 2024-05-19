@@ -40,8 +40,14 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
-							"wildcardFolderPath": "@pipeline().parameters.WildcardFolderPath",
-							"wildcardFileName": "@pipeline().parameters.WildcardFileName",
+							"wildcardFolderPath": {
+								"value": "@pipeline().parameters.WildcardFolderPath",
+								"type": "Expression"
+							},
+							"wildcardFileName": {
+								"value": "@pipeline().parameters.WildcardFileName",
+								"type": "Expression"
+							},
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
@@ -262,7 +268,10 @@
 						"storedProcedureParameters": {
 							"Comments": {
 								"type": "String",
-								"value": null
+								"value": {
+									"value": "@pipeline().parameters.CommentWhichPipe",
+									"type": "Expression"
+								}
 							},
 							"PipelineRunId": {
 								"type": "Guid",
@@ -321,6 +330,9 @@
 			"WildcardFileName": {
 				"type": "string",
 				"defaultValue": "*.csv"
+			},
+			"CommentWhichPipe": {
+				"type": "string"
 			}
 		},
 		"variables": {
