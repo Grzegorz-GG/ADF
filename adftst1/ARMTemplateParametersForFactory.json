@@ -10,6 +10,12 @@
 		},
 		"SQLdb_connectionString": {
 			"value": ""
+		},
+		"AnyBlobStorage_properties_typeProperties_connectionString_secretName": {
+			"value": "@linkedService().ConnectionSecretName"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://keyvaulttst3.vault.azure.net/"
 		}
 	}
 }
