@@ -7,7 +7,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "Set variable2",
+						"activity": "Set RunSeqNo",
 						"dependencyConditions": [
 							"Succeeded"
 						]
@@ -298,7 +298,7 @@
 				}
 			},
 			{
-				"name": "Set variable2",
+				"name": "Set RunSeqNo",
 				"type": "SetVariable",
 				"dependsOn": [
 					{
@@ -320,6 +320,36 @@
 						"type": "Expression"
 					}
 				}
+			},
+			{
+				"name": "Set return value",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set RunSeqNo",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "pipelineReturnValue",
+					"value": [
+						{
+							"key": "PipelineRunSeqNo",
+							"value": {
+								"type": "Expression",
+								"content": "@variables('RunSeqNo')"
+							}
+						}
+					],
+					"setSystemVariable": true
+				}
 			}
 		],
 		"parameters": {
@@ -338,6 +368,15 @@
 		"variables": {
 			"RunSeqNo": {
 				"type": "Integer"
+			},
+			"ReturnValue": {
+				"type": "Integer"
+			},
+			"ReturnValueArray": {
+				"type": "Array"
+			},
+			"ReturnedValues": {
+				"type": "Array"
 			}
 		},
 		"annotations": []

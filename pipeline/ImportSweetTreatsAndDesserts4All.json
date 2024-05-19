@@ -50,8 +50,37 @@
 						"CommentWhichPipe": "SweetTreats"
 					}
 				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "SweetTreats",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "ReturnedValue",
+					"value": {
+						"value": "@activity('Desserts4All').output.pipelineReturnValue.PipelineRunSeqNo",
+						"type": "Expression"
+					}
+				}
 			}
 		],
+		"variables": {
+			"ReturnedValue": {
+				"type": "Array"
+			}
+		},
 		"annotations": []
 	}
 }
