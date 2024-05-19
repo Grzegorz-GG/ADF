@@ -40,8 +40,8 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
-							"wildcardFolderPath": "Azure-Data-Factory-by-Example-Second-Edition-main.zip/Azure-Data-Factory-by-Example-Second-Edition-main/SampleData/Desserts4All",
-							"wildcardFileName": "*csv",
+							"wildcardFolderPath": "@pipeline().parameters.WildcardFolderPath",
+							"wildcardFileName": "@pipeline().parameters.WildcardFileName",
 							"enablePartitionDiscovery": false
 						},
 						"formatSettings": {
