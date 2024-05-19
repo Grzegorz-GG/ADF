@@ -706,7 +706,10 @@
 								"storedProcedureParameters": {
 									"Comments": {
 										"type": "String",
-										"value": null
+										"value": {
+											"value": "@pipeline().parameters.CommentWhichPipe",
+											"type": "Expression"
+										}
 									},
 									"PipelineRunId": {
 										"type": "Guid",
@@ -769,6 +772,9 @@
 					"WildcardFileName": {
 						"type": "string",
 						"defaultValue": "*.csv"
+					},
+					"CommentWhichPipe": {
+						"type": "string"
 					}
 				},
 				"variables": {
@@ -791,7 +797,7 @@
 			"properties": {
 				"activities": [
 					{
-						"name": "Execute Pipeline1",
+						"name": "Desserts4All",
 						"type": "ExecutePipeline",
 						"dependsOn": [],
 						"policy": {
@@ -806,16 +812,17 @@
 							"waitOnCompletion": true,
 							"parameters": {
 								"WildcardFolderPath": "Azure-Data-Factory-by-Example-Second-Edition-main.zip/Azure-Data-Factory-by-Example-Second-Edition-main/SampleData/Desserts4All",
-								"WildcardFileName": "*.csv"
+								"WildcardFileName": "*.csv",
+								"CommentWhichPipe": "Deserts4All"
 							}
 						}
 					},
 					{
-						"name": "Execute Pipeline2",
+						"name": "SweetTreats",
 						"type": "ExecutePipeline",
 						"dependsOn": [
 							{
-								"activity": "Execute Pipeline1",
+								"activity": "Desserts4All",
 								"dependencyConditions": [
 									"Succeeded"
 								]
@@ -833,7 +840,8 @@
 							"waitOnCompletion": true,
 							"parameters": {
 								"WildcardFolderPath": "Azure-Data-Factory-by-Example-Second-Edition-main.zip/Azure-Data-Factory-by-Example-Second-Edition-main/SampleData/SweetTreats/**",
-								"WildcardFileName": "*.csv"
+								"WildcardFileName": "*.csv",
+								"CommentWhichPipe": "SweetTreats"
 							}
 						}
 					}
